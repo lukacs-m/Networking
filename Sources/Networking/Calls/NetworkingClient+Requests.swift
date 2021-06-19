@@ -9,15 +9,15 @@ import Foundation
 import Combine
 
 public extension NetworkingClient {
-
+    
     func getRequest(_ route: String, params: Params = Params()) -> NetworkingRequest {
         request(.get, route, params: params)
     }
-
+    
     func postRequest(_ route: String, params: Params = Params()) -> NetworkingRequest {
         request(.post, route, params: params)
     }
-
+    
     func putRequest(_ route: String, params: Params = Params()) -> NetworkingRequest {
         request(.put, route, params: params)
     }
@@ -25,23 +25,22 @@ public extension NetworkingClient {
     func patchRequest(_ route: String, params: Params = Params()) -> NetworkingRequest {
         request(.patch, route, params: params)
     }
-
+    
     func deleteRequest(_ route: String, params: Params = Params()) -> NetworkingRequest {
         request(.delete, route, params: params)
     }
-
+    
     internal func request(_ httpVerb: HTTPVerb, _ route: String, params: Params = Params()) -> NetworkingRequest {
         let req = NetworkingRequest()
-        req.baseURL = baseURL
-        req.logLevels = logLevels
-        req.headers = headers
-        req.httpVerb = httpVerb
-        req.route = route
-        req.params = params
-        req.parameterEncoding = parameterEncoding
-        if let t = timeout {
-            req.timeout = t
-        }
+        req.baseURL              = baseURL
+        req.logLevels            = logLevels
+        req.headers              = headers
+        req.httpVerb             = httpVerb
+        req.route                = route
+        req.params               = params
+        req.parameterEncoding    = parameterEncoding
+        req.sessionConfiguration = sessionConfiguration
+        req.timeout              = timeout
         return req
     }
 }
